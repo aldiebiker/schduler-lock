@@ -15,11 +15,11 @@ public class Task {
 	@Autowired
 	private UserRepository userRepository;
 	
-	private static final String TEN_MIN = "PT10M";
+	private static final String HOURS_HUNDRED = "PT100H";
 
 	
 	@Scheduled(fixedDelayString = "60000")
-	@SchedulerLock(name = "scheduledTaskName", lockAtMostForString = TEN_MIN, lockAtLeastForString = TEN_MIN)
+	@SchedulerLock(name = "emailSenderLock",   lockAtMostForString = HOURS_HUNDRED)
 	public void sayHello() throws InterruptedException {
 		List<User> users = userRepository.findAll();
 		System.out.println("Hello from instance" + users.toString());
